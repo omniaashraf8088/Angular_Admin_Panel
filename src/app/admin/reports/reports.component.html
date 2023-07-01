@@ -1,0 +1,78 @@
+<div class="container-fluid table-container">
+    <div class="row mx-0 my-3 d-flex justify-content-end align-items-center">
+        <mat-form-field class="col-md-2 col-12">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="date">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button color="primary" mat-raised-button (click)="filter()">
+            Filter
+        </button>
+        <button color="primary" mat-stroked-button (click)="reset()" class="ml-2">
+            Reset
+        </button>
+    </div>
+  
+    <div *ngIf="dataSource.data.length > 0; else emptyData" class="mat-elevation-z8">
+      <div class="table-content">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef> Category </th>
+            <td mat-cell *matCellDef="let element"> {{ getCategoryById(element.category) }} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date | date}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef> Time </th>
+            <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="from">
+            <th mat-header-cell *matHeaderCellDef> From </th>
+            <td mat-cell *matCellDef="let element"> {{ getStationById(element.from) }} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="to">
+            <th mat-header-cell *matHeaderCellDef> To </th>
+            <td mat-cell *matCellDef="let element"> {{ getStationById(element.to) }} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="standStations">
+            <th mat-header-cell *matHeaderCellDef> Stand Stations </th>
+            <td mat-cell *matCellDef="let element"> {{element.standStations}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="availableSeats">
+            <th mat-header-cell *matHeaderCellDef> Available Seats </th>
+            <td mat-cell *matCellDef="let element"> {{element.availableSeats}} </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons [length]="dataSource.data.length"></mat-paginator>
+    </div>
+  </div>
+  
+  <ng-template #emptyData>
+    <app-empty-data></app-empty-data>
+  </ng-template>
+  
+    

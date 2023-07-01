@@ -1,0 +1,15 @@
+.time {
+    background: #EAEFF1;
+    border: none;
+    border-bottom: 4px solid #C9D6DA;
+    display: block;
+    margin-bottom: 0.625em;
+    margin-top: 0.3em;
+    outline-offset: 3px;
+    padding: 0.45em 0.45em 0.45em 0.65em;
+    width: 100%;
+}
+
+.time:focus {
+    outline: 0;
+}
